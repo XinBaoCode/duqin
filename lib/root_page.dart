@@ -18,12 +18,13 @@ const Map<String, String> _buttonNames = {
 class _RootPageState extends State<RootPage> {
   // 当前选中页索引
   int _currentIndex = 0;
-  // 底部
+  // 底部导航列表
   final List<BottomNavigationBarItem> _bottomNavBarList = [];
 
   @override
   void initState() {
     super.initState();
+    // 生成底部导航栏
     _buttonNames.forEach((key, value) {
       _bottomNavBarList.add(_bottomNavBarItem(key, value));
     });
@@ -32,15 +33,37 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('RootPage')),
+      body: const Center(child: Text('RootPage')),
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomNavBarList,
         currentIndex: _currentIndex,
         onTap: _onTabClick,
+        type: BottomNavigationBarType.fixed,
+      ),
+      floatingActionButton: _createMediaButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+// 中间的发布按钮
+  Widget _createMediaButton() {
+    return Container(
+      margin: EdgeInsets.only(top: 56),
+      child: FloatingActionButton(
+        onPressed: _onCreateMedia,
+        child: Image.asset(
+          'assets/images/icons/create_media.png',
+          width: 44,
+          height: 44,
+        ),
       ),
     );
   }
 
+  // 点击发布按钮
+  void _onCreateMedia() {}
+
+  // 单个导航列表
   BottomNavigationBarItem _bottomNavBarItem(String key, String value) {
     return BottomNavigationBarItem(
       icon: Image.asset(
