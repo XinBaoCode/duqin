@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wangyiyun/config/app_colors.dart';
 import 'package:wangyiyun/view/root_pages/home_page.dart';
 import 'package:wangyiyun/view/root_pages/music_page.dart';
 import 'package:wangyiyun/view/root_pages/profile.dart';
@@ -62,6 +63,7 @@ class _RootPageState extends State<RootPage> {
     return Container(
       margin: const EdgeInsets.only(top: 56),
       child: FloatingActionButton(
+        backgroundColor: AppColors.nav,
         onPressed: _onCreateMedia,
         child: Image.asset(
           'assets/images/icons/create_media.png',
