@@ -7,11 +7,49 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+const List<Tab> _tabs = [
+  Tab(text: "歌曲"),
+  Tab(text: "推荐"),
+  Tab(text: "歌手"),
+  Tab(text: "小视频"),
+  Tab(text: "文章"),
+  Tab(text: "视频"),
+];
+
+final List<Widget> _tabsContent = [
+  Text('11111'),
+  Text('22222'),
+  Text('33333'),
+  Text('44444'),
+  Text('55555'),
+  Text('66666'),
+];
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _tabs.length, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("home_page"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "首页",
+        ),
+        bottom: TabBar(
+          tabs: _tabs,
+          controller: _tabController,
+          // isScrollable: true,
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: _tabsContent,
+      ),
     );
   }
 }
