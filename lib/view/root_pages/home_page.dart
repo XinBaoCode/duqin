@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wangyiyun/components/root_page_head.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -30,20 +31,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: _tabs.length, vsync: this);
+    _tabController =
+        TabController(initialIndex: 1, length: _tabs.length, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "首页",
-        ),
+        title: RootHead(),
         bottom: TabBar(
           tabs: _tabs,
           controller: _tabController,
-          // isScrollable: true,
+          isScrollable: true,
         ),
       ),
       body: TabBarView(
