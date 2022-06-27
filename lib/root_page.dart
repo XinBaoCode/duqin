@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wangyiyun/view/root_pages/home_page.dart';
+import 'package:wangyiyun/view/root_pages/music_page.dart';
+import 'package:wangyiyun/view/root_pages/profile.dart';
+import 'package:wangyiyun/view/root_pages/tiny_video.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -20,6 +24,14 @@ class _RootPageState extends State<RootPage> {
   int _currentIndex = 0;
   // 底部导航列表
   final List<BottomNavigationBarItem> _bottomNavBarList = [];
+  // 页面集合
+  final List<Widget> _pages = [
+    HomePage(),
+    MusicPage(),
+    Container(),
+    ProfilePage(),
+    TinyVideoPage(),
+  ];
 
   @override
   void initState() {
@@ -33,7 +45,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const Center(child: Text('RootPage')),
+      body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomNavBarList,
         currentIndex: _currentIndex,
@@ -48,7 +60,7 @@ class _RootPageState extends State<RootPage> {
 // 中间的发布按钮
   Widget _createMediaButton() {
     return Container(
-      margin: EdgeInsets.only(top: 56),
+      margin: const EdgeInsets.only(top: 56),
       child: FloatingActionButton(
         onPressed: _onCreateMedia,
         child: Image.asset(
@@ -77,11 +89,15 @@ class _RootPageState extends State<RootPage> {
         height: 24,
       ),
       label: value,
+      tooltip: "",
     );
   }
 
   // 底部切换
   void _onTabClick(int index) {
+    if (index == 2) {
+      return _onCreateMedia();
+    }
     setState(() {
       _currentIndex = index;
     });
